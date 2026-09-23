@@ -86,3 +86,30 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
     .portada { height: 300px; }
     .previa { height: 200px; }
 }
+.cabecera {
+    position: relative;
+}
+
+#cerrarSesion {
+    background: #a94442;
+    color: white;
+    border-color: #a94442;
+}
+
+#cerrarSesion:hover {
+    background: #843534;
+    border-color: #843534;
+}
+
+@media (max-width: 620px) {
+    .cabecera {
+        position: relative;
+        padding-top: 55px;
+    }
+
+    #cerrarSesion {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
