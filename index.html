@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi biblioteca</title>
+    <link rel="stylesheet" href="stile.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+<main>
+    <section id="inicioSesion" class="panel login">
+        <div class="marca">MI BIBLIOTECA</div>
+        <h1>Tus libros<br> PAGAME.</h1>
+        <p class="intro">Ingresa con tu cuenta para consultar y organizar tu biblioteca desde cualquier dispositivo.</p>
+        <form id="formLogin">
+            <label for="correo">Correo electronico</label>
+            <input id="correo" type="email" autocomplete="username" required placeholder="tu@correo.com">
+            <label for="contrasena">Contraseña</label>
+            <input id="contrasena" type="password" autocomplete="current-password" required>
+            <label class="casilla"><input id="mostrarContrasena" type="checkbox"> Mostrar contraseña</label>
+            <button id="entrar" type="submit">Iniciar sesion</button>
+        </form>
+        <p id="errorLogin" class="mensaje" role="alert"></p>
+        <p class="nota">Usa el correo y la contraseña de la cuenta creada para este catalogo.</p>
+    </section>
+    <div id="catalogo" hidden>
+        <header class="cabecera">
+            <div><div class="marca">MI BIBLIOTECA</div><h1>Un lugar para tus libros.</h1><p class="intro">Lecturas, ideas e historias que quieres conservar.</p></div>
+            <div class="cuenta"><span id="cuentaCorreo"></span><button id="cerrarSesion" class="secundario" type="button">Cerrar sesion</button></div>
+        </header>
+        <div class="barra"><p id="estado" role="status">Cargando biblioteca...</p><button id="actualizar" class="secundario" type="button">Actualizar</button></div>
+        <section class="panel registro">
+            <div class="tituloSeccion"><h2 id="formTitulo">Registrar libro</h2><span class="nota">* Campos obligatorios</span></div>
+            <form id="formulario">
+                <fieldset id="camposLibro">
+                    <div class="formGrid">
+                        <div class="campos">
+                            <div><label for="titulo">Titulo del libro *</label><input id="titulo" required maxlength="200"></div>
+                            <div><label for="autor">Autor *</label><input id="autor" required maxlength="200"></div>
+                            <div><label for="movimiento">Movimiento literario</label><input id="movimiento" list="movimientos" maxlength="100" placeholder="Selecciona o escribe uno"><datalist id="movimientos"><option value="Clasicismo"><option value="Medieval"><option value="Renacimiento"><option value="Barroco"><option value="Neoclasicismo"><option value="Romanticismo"><option value="Realismo"><option value="Naturalismo"><option value="Modernismo"><option value="Vanguardismo"><option value="Sin clasificar"></datalist></div>
+                            <div><label for="anio">Año de publicacion</label><input id="anio" type="number" min="-5000" max="9999" step="1" placeholder="Opcional"></div>
+                            <div class="completo"><label for="comentario">Comentario</label><textarea id="comentario" maxlength="3000" rows="4" placeholder="Tu opinion o algo que quieras recordar"></textarea></div>
+                        </div>
+                        <div class="imagenCampo">
+                            <label for="imagen">Portada (opcional)</label>
+                            <div id="vistaPrevia" class="portada previa"><span>Sin imagen</span></div>
+                            <input id="imagen" type="file" accept="image/jpeg,image/png,image/webp">
+                            <p class="nota">JPG, PNG o WebP. Maximo 10 MB. Se ajusta automaticamente sin recortar.</p>
+                            <button id="quitarImagen" type="button" class="secundario pequeno" hidden>Quitar portada</button>
+                        </div>
+                    </div>
+                    <div class="acciones"><button id="guardar" type="submit">Guardar libro</button><button id="cancelar" type="button" class="secundario" hidden>Cancelar edicion</button></div>
+                </fieldset>
+            </form>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+        </section>
+        <section aria-labelledby="tituloLista">
+            <div class="tituloSeccion"><h2 id="tituloLista">Mis libros <span id="cantidad" class="contador">0</span></h2></div>
+            <div class="filtros panel">
+                <div><label for="buscar">Buscar en tu biblioteca</label><input id="buscar" type="search" placeholder="Titulo, autor, movimiento o comentario"></div>
+                <div><label for="filtro">Movimiento</label><select id="filtro"><option value="">Todos</option></select></div>
+                <div><label for="orden">Ordenar por</label><select id="orden"><option value="titulo">Titulo (A-Z)</option><option value="autor">Autor (A-Z)</option><option value="movimiento">Movimiento (A-Z)</option><option value="antiguo">Año: mas antiguo</option><option value="reciente">Año: mas reciente</option></select></div>
+            </div>
+            <div id="lista" class="libros"></div>
+            <p id="vacio" class="vacio" hidden>Todavia no tienes libros. Registra el primero arriba.</p>
+        </section>
+        <footer class="panel respaldo">
+            <div><h2>Respaldo de tu biblioteca</h2><p class="nota">Descarga tus datos y portadas, o carga un respaldo de la version anterior. Importar agrega libros sin reemplazar los existentes.</p></div>
+            <div class="acciones"><button id="exportar" class="secundario" type="button">Descargar respaldo</button><button id="importar" class="secundario" type="button">Cargar respaldo</button><input id="archivo" type="file" accept=".json,application/json" hidden></div>
+            <p class="nota">Necesitas internet para consultar y guardar. Los cambios se consultan cada 15 segundos mientras la pagina esta visible, o al pulsar Actualizar.</p>
+        </footer>
+    </div>
+    <noscript>Activa JavaScript en tu navegador para usar el catalogo.</noscript>
+</main>
+</body>
+</html>
